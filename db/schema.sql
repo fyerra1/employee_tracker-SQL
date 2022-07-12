@@ -1,5 +1,5 @@
-DROP IF EXISTS employees_db;
-CREATE employees_db;
+DROP IF EXISTS staff_db;
+CREATE staff_db;
 
 DROP TABLE IF EXIST
 
@@ -23,7 +23,7 @@ CREATE TABLE employees {
   role_id INT,
   manager_id INT,
   FOREIGN KEY (role_id) REFERENCES role(id),
-  FOREIGN KEY (manager_id) REFERENCES manager(id)
+  FOREIGN KEY (manager_id) REFERENCES managers(id)
 }
 
 
