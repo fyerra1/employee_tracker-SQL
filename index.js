@@ -3,31 +3,31 @@ const connection = require('./config/connection');
 const cTable = require('console.table');
 
 const viewDepartments = () => {
-  console.log('view departments');
+  console.log('viewing aa departments');
 };
 
 const viewRoles = () => {
-  console.log('view roles');
+  console.log('viewing all roles');
 };
 
 const viewEmployees = () => {
-  console.log('view employees');
+  console.log('viewing all employees');
 };
 
 const addDepartment = () => {
-  console.log('add department');
+  console.log('added department');
 };
 
 const addRole = () => {
-  console.log('add role');
+  console.log('added role');
 };
 
 const addEmployee = () => {
-  console.log('add employee');
+  console.log('added employee');
 };
 
 const updateRole = () => {
-  console.log('update role');
+  console.log('updated role');
 };
 
 const manageCompany = () => {
