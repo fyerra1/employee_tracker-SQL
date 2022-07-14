@@ -62,6 +62,7 @@ const manageCompany = () => {
 
 const pushCommand = (commands) => {
   console.log(commands);
+  console.log(commands.manage);
 
   // switch(commands)
 
