@@ -3,31 +3,31 @@ const connection = require('./config/connection');
 const cTable = require('console.table');
 
 const viewDepartments = () => {
-
+  console.log('view departments');
 };
 
 const viewRoles = () => {
-
+  console.log('view roles');
 };
 
 const viewEmployees = () => {
-
+  console.log('view employees');
 };
 
 const addDepartment = () => {
-
+  console.log('add department');
 };
 
 const addRole = () => {
-
+  console.log('add role');
 };
 
 const addEmployee = () => {
-
+  console.log('add employee');
 };
 
 const updateRole = () => {
-
+  console.log('update role');
 };
 
 const manageCompany = () => {
@@ -61,10 +61,32 @@ const manageCompany = () => {
 }
 
 const pushCommand = (commands) => {
-  console.log(commands);
-  console.log(commands.manage);
 
-  // switch(commands)
+  switch(commands.manage) {
+
+    case 'View all departments':
+      viewDepartments();
+      break;
+    case 'View all roles':
+      viewRoles();
+      break;
+    case 'View all employees':
+      viewEmployees();
+      break;
+    case 'Add a department':
+      addDepartment();
+      break;
+    case 'Add a role':
+      addRole();
+      break;
+    case 'Add an employee':
+      addEmployee();
+      break;
+    case 'Update employee role':
+      updateRole();
+      break;
+
+  }
 
 }
 
