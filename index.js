@@ -53,7 +53,7 @@ const addDepartment = () => {
           viewDepartments();
       })
     })
-    
+
 };
 
 const addRole = () => {
@@ -98,7 +98,63 @@ const addRole = () => {
 };
 
 const addEmployee = () => {
-  console.log('added employee');
+  db.query(`SELECT * FROM roles`, (err, rows) => {
+    if(err) {
+      console.log(err)
+    } const roles = rows.map( ({ title, id }) => ({ name: title, value: id }))
+      console.log(roles);
+
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'newLast',
+          message: 'Provide last name for new employee'
+        },
+        {
+          type: 'input',
+          name: 'newFirst',
+          message: 'Provide first name for new employee'
+        },
+        {
+          type: 'list',
+          name: 'newRole',
+          message: 'Assign role to new employee',
+          choices: roles
+        }
+      ])
+        .then(response => {
+          const newEmployee = [response.newLast, response.newFirst, response.newRole]
+          db.query(`SELECT last_name, first_name, id FROM employees WHERE manager_id IS NULL`, (err, rows) => {
+            if(err) {
+              console.log(err)
+            } const managers = rows.map( ({ last_name, first_name, title, id }) => ({ name: `${last_name}, ${first_name}`, value: id}))
+              managers.push({ name: 'Manager not needed', value: null });
+              
+              inquirer.prompt([
+                {
+                type: 'list',
+                name: 'assignManager',
+                message: 'Assign manager to new employee',
+                choices: managers
+                }
+              ])
+              .then(response => {
+                newEmployee.push(response.assignManager);
+                console.log(newEmployee);
+
+                const sql = `INSERT INTO employees (last_name, first_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
+                db.query(sql, newEmployee, (err, rows) => {
+                  if (err) {
+                    console.log(err)
+                  } console.table(rows)
+                    viewEmployees();
+                })
+                
+              })
+          })
+        })
+  })
+  
 };
 
 const updateRole = () => {
