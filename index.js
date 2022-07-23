@@ -34,6 +34,7 @@ const viewEmployees = () => {
 };
 
 const addDepartment = () => {
+
   inquirer.prompt([
     {
       type: 'input',
@@ -49,9 +50,10 @@ const addDepartment = () => {
         if (err) {
           console.log(err)
         } console.table(rows)
-          manageCompany();
+          viewDepartments();
       })
     })
+    
 };
 
 const addRole = () => {
@@ -80,21 +82,19 @@ const addRole = () => {
         }
       ])
         .then(response => {
-          console.log(response.newTitle);
-          console.log(response.newSalary);
-          console.log(response.newDepartment);
-        })
-  })
+          const newRole = [response.newTitle, response.newSalary, response.newDepartment];
+          console.log(newRole);
 
-      
-    //   // const sql = `INSERT INTO departments (name) VALUES (?)`;
-    //   // db.query(sql, departmentName, (err, rows) => {
-    //   //   if (err) {
-    //   //     console.log(err)
-    //   //   } console.table(rows)
-    //   //     manageCompany();
-    //   // })
-    // })
+          const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
+          db.query(sql, newRole, (err, rows) => {
+            if (err) {
+              console.log(err)
+            } console.table(rows)
+              viewRoles();
+          })
+        })
+    
+  })
 };
 
 const addEmployee = () => {
