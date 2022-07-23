@@ -11,7 +11,7 @@ VALUES ("CEO", 100000, 1),
        ("Sales Manager", 90000, 2),
        ("Software Engineer", 80000, 3),
        ("Business Analyst", 80000, 3),
-       ("Sales Representative", 90000, 3);
+       ("Sales Representative", 80000, 3);
 
 INSERT INTO employees (last_name, first_name, role_id, manager_id)
 VALUES ("Jordan", "Michael", 1, null),
