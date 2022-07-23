@@ -4,7 +4,7 @@ const cTable = require('console.table');
 
 
 const viewDepartments = () => {
-  const sql = `SELECT id, name FROM departments`;
+  const sql = `SELECT * FROM departments`;
   db.query(sql, (err, rows) => {
     if (err) {
       console.log(err)
@@ -37,10 +37,6 @@ const updateRole = () => {
   console.log('updated role');
 };
 
-db.connect(err => {
-  if (err) throw err;
-  manageCompany();
-});
 
 const manageCompany = () => {
   return inquirer.prompt({
@@ -53,54 +49,34 @@ const manageCompany = () => {
   })
 
   .then(response => {
-    pushCommand(response);
-    return inquirer.prompt([
-      {
+    switch(response.manage) {
 
-      type: 'confirm',
-      name: 'continue',
-      message: 'Would you like to manage more company employees',
-
-      }
-    ])
-  })
-
-    .then(secondResponse => {
-      if(secondResponse.continue) {
-        return manageCompany()
-      }
+      case 'View all departments':
+        viewDepartments();
+        break;
+      case 'View all roles':
+        viewRoles();
+        break;
+      case 'View all employees':
+        viewEmployees();
+        break;
+      case 'Add a department':
+        addDepartment();
+        break;
+      case 'Add a role':
+        addRole();
+        break;
+      case 'Add an employee':
+        addEmployee();
+        break;
+      case 'Update employee role':
+        updateRole();
+        break;
+  }
+  
     })
 }
 
-const pushCommand = (commands) => {
-
-  switch(commands.manage) {
-
-    case 'View all departments':
-      viewDepartments();
-      break;
-    case 'View all roles':
-      viewRoles();
-      break;
-    case 'View all employees':
-      viewEmployees();
-      break;
-    case 'Add a department':
-      addDepartment();
-      break;
-    case 'Add a role':
-      addRole();
-      break;
-    case 'Add an employee':
-      addEmployee();
-      break;
-    case 'Update employee role':
-      updateRole();
-      break;
-
-  }
-
-}
 
 manageCompany();
 
