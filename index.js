@@ -2,8 +2,24 @@ const inquirer = require('inquirer');
 const connection = require('./config/connection');
 const cTable = require('console.table');
 
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    user: 'root',
+    password: '123password',
+    database: 'staff_db'
+  },
+  console.log(`Connected to the staff_db database.`)
+);
+
 const viewDepartments = () => {
-  console.log('viewing aa departments');
+  const sql = `SELECT id, name FROM departments`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err)
+    } console.table(rows)
+      manageCompany();
+  })
 };
 
 const viewRoles = () => {
@@ -29,6 +45,11 @@ const addEmployee = () => {
 const updateRole = () => {
   console.log('updated role');
 };
+
+db.connect(err => {
+  if (err) throw err;
+  manageCompany();
+});
 
 const manageCompany = () => {
   return inquirer.prompt({

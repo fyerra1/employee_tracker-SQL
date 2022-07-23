@@ -1,25 +1,25 @@
-INSERT INTO department (name)
-VALUES ("Lion King"),
-       ("The Godfather"),
-       ("West Side Story"),
-       ("Parasite"),
-       ("The Wizard of Oz");
+INSERT INTO departments (name)
+VALUES ("Executive"),
+       ("Management"),
+       ("Operations");
 
 INSERT INTO roles (title, salary, department_id)
-VALUES (1, "Zazu is underrated. Give that hornbill a sequel!"),
-       (2, "I'm gonna make him an offer you can't refuse, watch this movie"),
-       (1, "Scar is the lion everyone loves to hate"),
-       (3, "Ten years of ballet and three years of tap to join a gang in this neighborhood"),
-       (5, "The tin man gave a metallic, hollow performance"),
-       (1, "Hakuna matata"),
-       (5, "Those flying monkeys are nightmare fuel!");
+VALUES ("CEO", 100000, 1),
+       ("CFO", 100000, 1),
+       ("HR Manager", 90000, 2),
+       ("IT Manager", 90000, 2),
+       ("Sales Manager", 90000, 2),
+       ("Software Engineer", 80000, 3),
+       ("Business Analyst", 80000, 3),
+       ("Sales Representative", 90000, 3);
 
 INSERT INTO employees (last_name, first_name, role_id, manager_id)
-VALUES (1, "Zazu is underrated. Give that hornbill a sequel!"),
-       (2, "I'm gonna make him an offer you can't refuse, watch this movie"),
-       (1, "Scar is the lion everyone loves to hate"),
-       (3, "Ten years of ballet and three years of tap to join a gang in this neighborhood"),
-       (5, "The tin man gave a metallic, hollow performance"),
-       (1, "Hakuna matata"),
-       (5, "Those flying monkeys are nightmare fuel!");
+VALUES ("Jordan", "Michael", 1, null),
+       ("James", "Lebron", 2, null),
+       ("Abdul-Jabbar", "Kareem", 3, 1),
+       ("Johnson", "Magic", 4, 2),
+       ("Chamberlain", "Wilt", 5, 2),
+       ("Russell", "Bill", 6, 4),
+       ("Bird", "Larry", 7, 5),
+       ("Duncan", "Tim", 8, 5);
        
