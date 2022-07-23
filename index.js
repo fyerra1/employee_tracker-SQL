@@ -1,16 +1,7 @@
 const inquirer = require('inquirer');
-const connection = require('./config/connection');
+const db = require('./config/connection');
 const cTable = require('console.table');
 
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    user: 'root',
-    password: '123password',
-    database: 'staff_db'
-  },
-  console.log(`Connected to the staff_db database.`)
-);
 
 const viewDepartments = () => {
   const sql = `SELECT id, name FROM departments`;
