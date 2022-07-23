@@ -14,11 +14,23 @@ const viewDepartments = () => {
 };
 
 const viewRoles = () => {
-  console.log('viewing all roles');
+  const sql = `SELECT * FROM roles`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err)
+    } console.table(rows)
+      manageCompany();
+  })
 };
 
 const viewEmployees = () => {
-  console.log('viewing all employees');
+  const sql = `SELECT * FROM employees`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err)
+    } console.table(rows)
+      manageCompany();
+  })
 };
 
 const addDepartment = () => {
