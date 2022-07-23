@@ -55,48 +55,46 @@ const addDepartment = () => {
 };
 
 const addRole = () => {
+
   db.query(`SELECT * FROM departments`, (err, rows) => {
     if(err) {
       console.log(err)
     } const departments = rows.map( ({ name, id }) => ({ name: name, value: id }))
+     
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'newTitle',
+          message: 'Provide title for the new role'
+        },
+        {
+          type: 'input',
+          name: 'newSalary',
+          message: 'Provide salary for the new role (i.e 70000)'
+        },
+        {
+          type: 'list',
+          name: 'newDepartment',
+          message: 'Assign new role to a department',
+          choices: departments
+        }
+      ])
+        .then(response => {
+          console.log(response.newTitle);
+          console.log(response.newSalary);
+          console.log(response.newDepartment);
+        })
   })
 
-  inquirer.prompt([
-    {
-      type: 'input',
-      name: 'newTitle',
-      message: 'Provide title for the new role'
-    },
-    {
-      type: 'input',
-      name: 'newSalary',
-      message: 'Provide salary for the new role (i.e 70000)'
-    },
-    {
-      type: 'list',
-      name: 'newDepartment',
-      message: 'Assign new role to a department',
-      choices: departments
-    }
-  ])
-
-    .then(response => {
-      const titleName = response.newTitle;
-      const salaryAmount = response.newSalary;
-      const assignDepartment = response.newDepartment;
-
-      console.log(titleName);
-      console.log(salaryAmount);
-      console.log(assignDepartment);
       
-      // const sql = `INSERT INTO departments (name) VALUES (?)`;
-      // db.query(sql, departmentName, (err, rows) => {
-      //   if (err) {
-      //     console.log(err)
-      //   } console.table(rows)
-      //     manageCompany();
-      // })
-    })
+    //   // const sql = `INSERT INTO departments (name) VALUES (?)`;
+    //   // db.query(sql, departmentName, (err, rows) => {
+    //   //   if (err) {
+    //   //     console.log(err)
+    //   //   } console.table(rows)
+    //   //     manageCompany();
+    //   // })
+    // })
 };
 
 const addEmployee = () => {
