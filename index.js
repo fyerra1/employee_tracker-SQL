@@ -127,14 +127,14 @@ const addEmployee = () => {
           db.query(`SELECT last_name, first_name, id FROM employees WHERE manager_id IS NULL`, (err, rows) => {
             if(err) {
               console.log(err)
-            } const managers = rows.map( ({ last_name, first_name, title, id }) => ({ name: `${last_name}, ${first_name}`, value: id}))
+            } const managers = rows.map( ({ last_name, first_name, id }) => ({ name: `${last_name}, ${first_name}`, value: id}))
               managers.push({ name: 'Manager not needed', value: null });
               
               inquirer.prompt([
                 {
                 type: 'list',
                 name: 'assignManager',
-                message: 'Assign manager to new employee',
+                message: 'Assign a manager to new employee',
                 choices: managers
                 }
               ])
@@ -158,8 +158,52 @@ const addEmployee = () => {
 };
 
 const updateRole = () => {
-  console.log('updated role');
-};
+  db.query(`SELECT * FROM employees`, (err, rows) => {
+    if(err) {
+      console.log(err)
+    } const employees = rows.map( ({ last_name, first_name, id }) => ({ name: `${last_name}, ${first_name}`, value: id }))
+      // console.log(roles);
+
+      inquirer.prompt([
+        {
+          type: 'list',
+          name: 'thisEmployee',
+          message: 'Select employee to update role',
+          choices: employees
+        }
+      ])
+      .then(response => {
+        const updatedRoleInfo = [response.thisEmployee];
+        db.query(`SELECT * FROM roles`, (err, rows) => {
+          if(err) {
+            console.log(err)
+          } const roles = rows.map( ({ title, id }) => ({ name: title, value: id }))
+            
+            inquirer.prompt([
+              {
+              type: 'list',
+              name: 'updateRole',
+              message: 'Select new role',
+              choices: roles
+              }
+            ])
+            .then(response => {
+              console.log(response.updateRole);
+              updatedRoleInfo.unshift(response.updateRole);
+              console.log(updatedRoleInfo);
+
+              const sql = `UPDATE employees SET role_id = ? WHERE id = ?`
+              db.query(sql, updatedRoleInfo, (err, rows) => {
+                if (err) {
+                  console.log(err)
+                }console.table(rows)
+                viewEmployees();
+              })
+            })
+        })
+      })
+})
+}
 
 
 const manageCompany = () => {
@@ -200,7 +244,6 @@ const manageCompany = () => {
   
     })
 }
-
 
 manageCompany();
 
