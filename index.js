@@ -83,7 +83,6 @@ const addRole = () => {
       ])
         .then(response => {
           const newRole = [response.newTitle, response.newSalary, response.newDepartment];
-          console.log(newRole);
 
           const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
           db.query(sql, newRole, (err, rows) => {
@@ -102,7 +101,6 @@ const addEmployee = () => {
     if(err) {
       console.log(err)
     } const roles = rows.map( ({ title, id }) => ({ name: title, value: id }))
-      console.log(roles);
 
       inquirer.prompt([
         {
@@ -140,7 +138,6 @@ const addEmployee = () => {
               ])
               .then(response => {
                 newEmployee.push(response.assignManager);
-                console.log(newEmployee);
 
                 const sql = `INSERT INTO employees (last_name, first_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
                 db.query(sql, newEmployee, (err, rows) => {
@@ -162,7 +159,6 @@ const updateRole = () => {
     if(err) {
       console.log(err)
     } const employees = rows.map( ({ last_name, first_name, id }) => ({ name: `${last_name}, ${first_name}`, value: id }))
-      // console.log(roles);
 
       inquirer.prompt([
         {
