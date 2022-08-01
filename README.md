@@ -7,8 +7,8 @@
   ## Video Recording
   [WALK-THROUGH VIDEO](https://drive.google.com/drive/folders/1eBZAD336dVGj7XKMfhvl_BHAKF--iBR-?usp=sharing)
 
-  ## Screenshots
-  ![]()
+  ## Screenshot
+  ![](./assets/screenshot.png)
 
   ## Table of Contents
   #### [Installation](#installation)
